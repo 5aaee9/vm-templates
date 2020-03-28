@@ -40,6 +40,6 @@ jobs:
         run: |
           curl -X POST \
             -F "filename=centos-8-stream-amd64.qcow2" \
-            -F "file=@releases/centos-8-stream-amd64.qcow2" \
+            -F "file=@centos-8-stream-amd64/output-centos-8-stream-amd64/packer-centos-8-stream-amd64" \
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-upload.indexyz.me/QEMU/Templates
