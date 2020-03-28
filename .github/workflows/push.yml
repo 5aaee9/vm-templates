@@ -35,7 +35,11 @@ jobs:
           ls -lah output-centos-8-stream-amd64
 
       - name: Release files
+        env:
+          FILE_UPLOAD_TOKEN: ${{ secrets.FILE_UPLOAD_TOKEN }}
         run: |
-          mkdir releases
-          mv centos-8-stream-amd64/output-centos-8-stream-amd64/packer-centos-8-stream-amd64 \
-            releases/centos-8-stream-amd64.qcow2
+          curl -X POST \
+            -F "filename=centos-8-stream-amd64.qcow2" \
+            -F "file=@releases/centos-8-stream-amd64.qcow2" \
+            -F "token=$FILE_UPLOAD_TOKEN" \
+            https://files-upload.indexyz.me/QEMU/Templates
