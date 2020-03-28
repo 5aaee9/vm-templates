@@ -33,3 +33,9 @@ jobs:
           cd centos-8-stream-amd64
           packer build build.json
           ls -lah output-centos-8-stream-amd64
+
+      - name: Release files
+        run: |
+          mkdir releases
+          mv centos-8-stream-amd64/output-centos-8-stream-amd64/packer-centos-8-stream-amd64 \
+            releases/centos-8-stream-amd64.qcow2
