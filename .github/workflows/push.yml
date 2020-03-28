@@ -31,3 +31,4 @@ jobs:
         run: |
           cd centos-8-stream-amd64
           packer build build.json
+          ls -lah output-centos-8-stream-amd64
