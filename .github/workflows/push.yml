@@ -17,8 +17,8 @@ jobs:
 
       - name: Setup QEMU
         run: |
-          apt-get update -y
-          apt-get install qemu unzip wget -y
+          sudo apt-get update -y
+          sudo apt-get install qemu unzip wget -y
 
       - name: Setup Packer
         run: |
