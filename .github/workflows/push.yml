@@ -29,6 +29,7 @@ jobs:
 
       - name: Build centos-8-stream-amd64
         run: |
+          export PACKER_LOG=1
           cd centos-8-stream-amd64
           packer build build.json
           ls -lah output-centos-8-stream-amd64
