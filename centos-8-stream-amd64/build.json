@@ -1,0 +1,38 @@
+{
+    "variables": {
+        "disk_size": "8192M",
+        "kickstart": "kickstart.cfg"
+    },
+    "provisioners": [{
+        "type": "shell",
+        "scripts": [
+            "scripts/00-base.sh",
+            "scripts/98-cleanup.sh"
+        ]
+    }],
+    "builders": [{
+        "name": "centos-8-stream-amd64",
+        "type": "qemu",
+
+        "format": "qcow2",
+        "disk_size": "{{ user `disk_size`}}",
+        "memory": 2048,
+
+        "iso_urls": [
+            "CentOS-Stream-8-x86_64-20191219-boot.iso",
+            "https://mirrors.xtom.com.hk/centos/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20191219-boot.iso"
+        ],
+        "iso_checksum": "3E80A092E15D7C96105AA995C4F92F1C08361CEA4F75204BDBE51A1155359386",
+        "iso_checksum_type": "sha256",
+        
+        "ssh_username": "root",
+        "ssh_password": "packer",
+        "ssh_wait_timeout": "90m",
+        "http_directory": "http",
+
+        "boot_wait": "2s",
+        "boot_command": [
+            "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `kickstart` }}<enter>"
+        ]
+    }] 
+}
