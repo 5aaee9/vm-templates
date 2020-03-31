@@ -1,7 +1,8 @@
 {
     "variables": {
         "disk_size": "8192M",
-        "kickstart": "kickstart.cfg"
+        "kickstart": "kickstart.cfg",
+        "headless": "false"
     },
     "provisioners": [{
         "type": "shell",
@@ -18,24 +19,29 @@
 
         "format": "qcow2",
         "disk_size": "{{ user `disk_size`}}",
+        "disk_compression": true,
         "memory": 2048,
-        "headless": true,
+        "headless": "{{ user `headless` }}",
 
         "iso_urls": [
-            "CentOS-Stream-8-x86_64-20191219-boot.iso",
-            "https://mirrors.xtom.com.hk/centos/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20191219-boot.iso"
+            "../isos/{{ user `iso_name` }}"
         ],
-        "iso_checksum": "3E80A092E15D7C96105AA995C4F92F1C08361CEA4F75204BDBE51A1155359386",
+        "iso_checksum": "{{ user `iso_checksum` }}",
         "iso_checksum_type": "sha256",
 
         "ssh_username": "root",
         "ssh_password": "packer",
         "ssh_wait_timeout": "90m",
         "http_directory": "http",
+        "shutdown_command": "shutdown -P now",
 
         "boot_wait": "2s",
         "boot_command": [
             "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `kickstart` }}<enter>"
+        ],
+        "qemuargs": [
+            ["-fda", "cloud.img"],
+            ["-serial", "mon:stdio"]
         ]
     }]
 }

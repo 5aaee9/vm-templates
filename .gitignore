@@ -2,3 +2,4 @@ packer.exe
 *.iso
 packer_cache
 output-*
+isos
