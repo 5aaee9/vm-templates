@@ -20,12 +20,12 @@ jobs:
           packer build build.json
           ls -lah output-centos-8-stream-amd64
 
-      # - name: Release files
-      #   env:
-      #     FILE_UPLOAD_TOKEN: ${{ secrets.FILE_UPLOAD_TOKEN }}
-      #   run: |
-      #     curl -X POST \
-      #       -F "filename=centos-8-stream-amd64.qcow2" \
-      #       -F "file=@centos-8-stream-amd64/output-centos-8-stream-amd64/packer-centos-8-stream-amd64" \
-      #       -F "token=$FILE_UPLOAD_TOKEN" \
-      #       https://files-upload.indexyz.me/QEMU/Templates
+      - name: Release files
+        env:
+          FILE_UPLOAD_TOKEN: ${{ secrets.FILE_UPLOAD_TOKEN }}
+        run: |
+          curl -X POST \
+            -F "filename=centos-8-stream-amd64.qcow2" \
+            -F "file=@centos-8-stream-amd64/output-centos-8-stream-amd64/packer-centos-8-stream-amd64" \
+            -F "token=$FILE_UPLOAD_TOKEN" \
+            https://files-api.indexyz.me/QEMU/Templates
