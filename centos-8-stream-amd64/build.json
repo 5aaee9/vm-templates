@@ -7,6 +7,7 @@
         "type": "shell",
         "scripts": [
             "scripts/00-base.sh",
+            "scripts/01-config.sh",
             "scripts/98-cleanup.sh"
         ]
     }],
