@@ -30,7 +30,6 @@ jobs:
           cd archlinux-latest-amd64
           packer build -var 'headless=true' \
             -var-file image.json \
-            -var 'boot_wait=6m' \
             build.json
       - name: Release files
         env:
