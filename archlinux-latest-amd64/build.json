@@ -38,7 +38,7 @@
 
         "boot_wait": "2s",
         "boot_command": [
-            "<enter><wait2m>",
+            "<enter><wait5m>",
             "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait2s>",
             "bash install.sh<enter>"
         ]
