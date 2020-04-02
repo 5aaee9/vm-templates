@@ -2,7 +2,7 @@
 
 📦 Building KVM template and run everywhere
 
-![On Push](https://github.com/Indexyz/vm-templates/workflows/On%20Push/badge.svg)
+![VM Build](https://github.com/Indexyz/vm-templates/workflows/VM%20Build/badge.svg)
 
 ## Current Support System
 
@@ -10,4 +10,5 @@
 - [ArchLinux](https://github.com/Indexyz/vm-templates/tree/master/archlinux-latest-amd64)
 
 ## Build Release
+
 You can download result [here](https://files.indexyz.me/QEMU/Templates/)
