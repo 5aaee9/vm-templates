@@ -23,6 +23,7 @@ cloud_init_modules:
   - ca-certs
 
 cloud_config_modules:
+  - runcmd
   - mounts
   - locale
   - set-passwords
@@ -43,7 +44,7 @@ growpart:
 runcmd:
   - [ cloud-init-per, once, grow_VG, pvresize, /dev/sda2 ]
   - [ cloud-init-per, once, grow_LV, lvextend, -l, +100%FREE, /dev/system/root ]
-  - [ cloud-init-per, once, grow_fs, resize2fs, /dev/system/root ]
+  - [ cloud-init-per, once, grow_fs, xfs_growfs, -d, / ]
 EOF
 
 # Disable PredictableNetworkInterfaceNames
