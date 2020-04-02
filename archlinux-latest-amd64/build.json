@@ -2,7 +2,8 @@
     "variables": {
         "disk_size": "8192M",
         "headless": "false",
-        "accelerator": "kvm"
+        "accelerator": "kvm",
+        "boot_wait": "1m30s"
     },
     "provisioners": [{
         "type": "shell",
@@ -38,7 +39,7 @@
 
         "boot_wait": "2s",
         "boot_command": [
-            "<enter><wait5m>",
+            "<enter><wait{{ user `boot_wait` }}>",
             "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait2s>",
             "bash install.sh<enter>"
         ]
