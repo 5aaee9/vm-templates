@@ -37,11 +37,11 @@ system_info:
 
 growpart:
   mode: auto
-  devices: ['/dev/vda2']
+  devices: ['/dev/sda2']
   ignore_growroot_disabled: false
 
 runcmd:
-  - [ cloud-init-per, once, grow_VG, pvresize, /dev/vda2 ]
+  - [ cloud-init-per, once, grow_VG, pvresize, /dev/sda2 ]
   - [ cloud-init-per, once, grow_LV, lvextend, -l, +100%FREE, /dev/system/root ]
   - [ cloud-init-per, once, grow_fs, resize2fs, /dev/system/root ]
 EOF
