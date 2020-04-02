@@ -1,20 +1,20 @@
 {
     "variables": {
         "disk_size": "8192M",
-        "kickstart": "kickstart.cfg",
         "headless": "false",
         "accelerator": "kvm"
     },
     "provisioners": [{
         "type": "shell",
         "scripts": [
-            "scripts/00-base.sh",
-            "scripts/01-config.sh",
-            "scripts/98-cleanup.sh"
+            "scripts/00-install-system.sh",
+            "scripts/01-configure-arch.sh",
+            "scripts/02-cloudinit.sh",
+            "scripts/99-cleanup.sh"
         ]
     }],
     "builders": [{
-        "name": "centos-8-stream-amd64",
+        "name": "archlinux-latest-amd64",
         "type": "qemu",
         "accelerator": "{{ user `accelerator`}}",
 
@@ -38,11 +38,9 @@
 
         "boot_wait": "2s",
         "boot_command": [
-            "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `kickstart` }}<enter>"
-        ],
-        "qemuargs": [
-            ["-fda", "cloud.img"],
-            ["-serial", "mon:stdio"]
+            "<enter><wait1m30s>",
+            "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/install.sh<enter><wait2s>",
+            "bash install.sh<enter>"
         ]
     }]
 }
