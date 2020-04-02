@@ -1,4 +1,4 @@
 #!/bin/bash
 set -ex
 
-pacman -Scc
+yes | arch-chroot /mnt pacman -Scc
