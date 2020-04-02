@@ -3,7 +3,8 @@
         "disk_size": "8192M",
         "kickstart": "kickstart.cfg",
         "headless": "false",
-        "accelerator": "kvm"
+        "accelerator": "kvm",
+        "display": "gtk"
     },
     "provisioners": [{
         "type": "shell",
@@ -14,12 +15,13 @@
         ]
     }],
     "builders": [{
-        "name": "centos-8-stream-amd64",
+        "name": "centos-7-amd64",
         "type": "qemu",
-        "accelerator": "{{ user `accelerator`}}",
+        "display": "{{ user `display` }}",
+        "accelerator": "{{ user `accelerator` }}",
 
         "format": "qcow2",
-        "disk_size": "{{ user `disk_size`}}",
+        "disk_size": "{{ user `disk_size` }}",
         "disk_compression": true,
         "memory": 2048,
         "headless": "{{ user `headless` }}",
@@ -39,10 +41,6 @@
         "boot_wait": "2s",
         "boot_command": [
             "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `kickstart` }}<enter>"
-        ],
-        "qemuargs": [
-            ["-fda", "cloud.img"],
-            ["-serial", "mon:stdio"]
         ]
     }]
 }

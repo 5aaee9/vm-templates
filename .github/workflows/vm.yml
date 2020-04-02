@@ -13,13 +13,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Cache ISO image
-        id: cache-primes
-        uses: actions/cache@v1
-        with:
-          path: isos
-          key: ${{ runner.os }}-isos-archlinux
-
       - name: Download ISO
         run:
           bash scripts/download_iso.sh ./archlinux-latest-amd64
@@ -41,6 +34,35 @@ jobs:
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-api.indexyz.me/QEMU/Templates
 
+  centos-7:
+    name: CentOS 7 Build
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Download ISO
+        run:
+          bash scripts/download_iso.sh ./centos-7-amd64
+
+      - name: Build centos-7-amd64
+        run: |
+          export PACKER_LOG=1
+          cd centos-7-amd64
+          packer build -var 'headless=true' \
+            -var-file image.json \
+            build.json
+      - name: Release files
+        env:
+          FILE_UPLOAD_TOKEN: ${{ secrets.FILE_UPLOAD_TOKEN }}
+        run: |
+          curl -X POST \
+            -F "filename=centos-7-amd64.qcow2" \
+            -F "file=@centos-7-amd64/output-centos-7-amd64/packer-centos-7-amd64" \
+            -F "token=$FILE_UPLOAD_TOKEN" \
+            https://files-api.indexyz.me/QEMU/Templates
+
   centos-8-stream:
     name: CentOS 8 Stream Build
     runs-on: self-hosted
@@ -48,13 +70,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-
-      - name: Cache ISO image
-        id: cache-primes
-        uses: actions/cache@v1
-        with:
-          path: isos
-          key: ${{ runner.os }}-isos-centos-8-stream
 
       - name: Download ISO
         run:
@@ -68,7 +83,6 @@ jobs:
           packer build -var 'headless=true' \
             -var-file image.json \
             build.json
-          ls -lah output-centos-8-stream-amd64
 
       - name: Release files
         env:
