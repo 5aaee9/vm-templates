@@ -44,6 +44,6 @@ growpart:
 
 bootcmd:
   - [ cloud-init-per, once, grow_VG, pvresize, /dev/sda2 ]
-  - [ cloud-init-per, once, grow_LV, lvextend, -l, +100%FREE, /dev/system/root ]
+  - [ cloud-init-per, once, grow_LV, lvextend, -l, +100%FREE, /dev/centos/root ]
   - [ cloud-init-per, once, grow_fs, xfs_growfs, -d, / ]
 EOF
