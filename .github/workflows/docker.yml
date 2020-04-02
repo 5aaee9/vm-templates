@@ -3,6 +3,9 @@ name: Docker Image Build
 on:
   push:
     branches: [ master ]
+    paths:
+    - Dockerfile
+    - scripts/entrypoint.sh
 
 jobs:
   docker:
