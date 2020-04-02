@@ -10,4 +10,5 @@
 - [ArchLinux](https://github.com/Indexyz/vm-templates/tree/master/archlinux-latest-amd64)
 
 ## Build Release
+
 You can download result [here](https://files.indexyz.me/QEMU/Templates/)

@@ -6,7 +6,11 @@ ENV RUNNER_VERSION="2.168.0"
 RUN yes | pacman -Syu packer \
         qemu \
         cloud-utils \
+        dotnet-runtime \
         curl \
+        openssl \
+        zlib \
+        krb5 \
         wget \
         jq && \
     mkdir /runner && \
@@ -14,7 +18,6 @@ RUN yes | pacman -Syu packer \
     wget https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     rm -f ./actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
-    ./bin/installdependencies.sh && \
     mkdir _work
 
 WORKDIR /runner
