@@ -28,7 +28,6 @@ jobs:
         run: |
           export PACKER_LOG=1
           cd archlinux-latest-amd64
-          cloud-localds cloud.img cloud.cfg
           packer build -var 'headless=true' \
             -var-file image.json \
             build.json
