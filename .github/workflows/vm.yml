@@ -3,6 +3,9 @@ name: VM Build
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+    - Dockerfile
+    - scripts/entrypoint.sh
 
 jobs:
   archlinux:

@@ -6,6 +6,7 @@ ENV RUNNER_VERSION="2.168.0"
 RUN yes | pacman -Syu packer \
         qemu \
         cloud-utils \
+        ansible \
         dotnet-runtime \
         curl \
         openssl \
