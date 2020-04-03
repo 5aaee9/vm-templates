@@ -7,10 +7,15 @@
         "display": "gtk"
     },
     "provisioners": [{
+        "type": "ansible",
+        "playbook_file": "../shared/playbook.yml",
+        "galaxy_file": "../shared/requirements.yml",
+        "sftp_command": "/usr/libexec/openssh/sftp-server -e",
+        "galaxy_force_install": true
+    }, {
         "type": "shell",
         "scripts": [
             "scripts/00-base.sh",
-            "scripts/01-config.sh",
             "scripts/99-cleanup.sh"
         ]
     }],
@@ -35,6 +40,7 @@
         "ssh_username": "root",
         "ssh_password": "packer",
         "ssh_wait_timeout": "90m",
+        "ssh_file_transfer_method": "scp",
         "http_directory": "http",
         "shutdown_command": "shutdown -P now",
 
