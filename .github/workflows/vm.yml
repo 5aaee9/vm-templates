@@ -34,6 +34,35 @@ jobs:
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-api.indexyz.me/QEMU/Templates
 
+  centos-6:
+    name: CentOS 6 Build
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Download ISO
+        run:
+          bash scripts/download_iso.sh ./centos-6-amd64
+
+      - name: Build centos-6-amd64
+        run: |
+          export PACKER_LOG=1
+          cd centos-6-amd64
+          packer build -var 'headless=true' \
+            -var-file image.json \
+            build.json
+      - name: Release files
+        env:
+          FILE_UPLOAD_TOKEN: ${{ secrets.FILE_UPLOAD_TOKEN }}
+        run: |
+          curl -X POST \
+            -F "filename=centos-6-amd64.qcow2" \
+            -F "file=@centos-6-amd64/output-centos-6-amd64/packer-centos-6-amd64" \
+            -F "token=$FILE_UPLOAD_TOKEN" \
+            https://files-api.indexyz.me/QEMU/Templates
+
   centos-7:
     name: CentOS 7 Build
     runs-on: self-hosted
