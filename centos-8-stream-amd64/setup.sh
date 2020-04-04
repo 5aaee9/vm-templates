@@ -19,3 +19,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 if [ -d /boot/efi/EFI/redhat ]; then
     grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
 fi
+
+yum -y clean all
+
+sync

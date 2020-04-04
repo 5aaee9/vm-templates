@@ -14,8 +14,7 @@
     }, {
         "type": "shell",
         "scripts": [
-            "scripts/00-base.sh",
-            "scripts/99-cleanup.sh"
+            "setup.sh"
         ]
     }],
     "builders": [{
