@@ -11,6 +11,7 @@ RUN yes | pacman -Syu packer \
         curl \
         openssl \
         zlib \
+        rclone \
         krb5 \
         wget \
         jq && \
