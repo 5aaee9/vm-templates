@@ -5,7 +5,7 @@ CHROOT="arch-chroot /mnt"
 DISK=/dev/sda
 
 echo "* Configure SSH"
-yes | $CHROOT pacman -S openssh
+$CHROOT pacman -S openssh --noconfirm
 $CHROOT systemctl enable sshd
 $CHROOT passwd <<EOF
 packer
@@ -28,11 +28,11 @@ EOF
 echo "* Install GRUB"
 $CHROOT sed -i "s#^\(MODULES=(.*\))#\1virtio virtio_blk virtio_pci virtio_net)#" /etc/mkinitcpio.conf
 $CHROOT mkinitcpio -p linux
-yes | $CHROOT pacman -S grub
+$CHROOT pacman -S grub --noconfirm
 # sed -i 's#^\(GRUB_CMDLINE_LINUX_DEFAULT=".*\)"$#\1 net.ifnames=0 biosdevname=0"#' /mnt/etc/default/grub
 $CHROOT grub-install --target=i386-pc $DISK
 $CHROOT grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "* Install qemu-guest-agent"
-yes | $CHROOT pacman -S qemu-guest-agent
+$CHROOT pacman -S qemu-guest-agent --noconfirm
 $CHROOT systemctl enable qemu-ga
