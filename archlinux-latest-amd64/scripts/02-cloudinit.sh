@@ -45,7 +45,6 @@ cloud_init_modules:
   - seed_random
   - set_hostname
   - update_hostname
-  - update_etc_hosts
   - ssh
   - ca-certs
 
