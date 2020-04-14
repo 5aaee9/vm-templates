@@ -3,6 +3,10 @@ set -ex
 
 CHROOT="arch-chroot /mnt"
 
+cd /mnt/
+wget https://space.indexyz.me/packages/growpart-0.31-1-any.pkg.tar.xz
+yes | $CHROOT pacman -S /growpart-0.31-1-any.pkg.tar.xz
+rm -f growpart-0.31-1-any.pkg.tar.xz
 yes | $CHROOT pacman -S cloud-init
 
 cat > /mnt/etc/cloud/cloud.cfg <<EOF
