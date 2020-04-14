@@ -17,6 +17,7 @@
     "builders": [{
         "name": "archlinux-latest-amd64",
         "type": "qemu",
+        "disk_interface": "virtio-scsi",
         "accelerator": "{{ user `accelerator`}}",
 
         "format": "qcow2",
