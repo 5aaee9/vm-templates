@@ -2,7 +2,7 @@
 set -ex
 
 CHROOT="arch-chroot /mnt"
-DISK=/dev/vda
+DISK=/dev/sda
 
 echo "* Configure SSH"
 yes | $CHROOT pacman -S openssh
