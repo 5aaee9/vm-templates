@@ -36,6 +36,7 @@ cloud_config_modules:
   - resolv_conf
 
 system_info:
+  distro: arch
   default_user:
     name: root
 
