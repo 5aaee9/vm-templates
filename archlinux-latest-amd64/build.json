@@ -11,6 +11,7 @@
             "scripts/00-install-system.sh",
             "scripts/01-configure-arch.sh",
             "scripts/02-cloudinit.sh",
+            "scripts/03-ssh.sh",
             "scripts/99-cleanup.sh"
         ]
     }],
