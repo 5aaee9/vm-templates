@@ -5,9 +5,10 @@ CHROOT="arch-chroot /mnt"
 
 cd /mnt/
 wget https://space.indexyz.me/packages/growpart-0.31-1-any.pkg.tar.xz
-yes | $CHROOT pacman -U /growpart-0.31-1-any.pkg.tar.xz
+$CHROOT pacman -U /growpart-0.31-1-any.pkg.tar.xz --noconfirm
 rm -f growpart-0.31-1-any.pkg.tar.xz
-yes | $CHROOT pacman -S cloud-init
+$CHROOT pacman -S cloud-init --noconfirm
+pacman -Sy patch --noconfirm
 # Patch growpart
 # https://github.com/karelzak/util-linux/issues/949
 cd /mnt/usr/bin
