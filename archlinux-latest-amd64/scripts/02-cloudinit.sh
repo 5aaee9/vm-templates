@@ -30,7 +30,6 @@ cloud_config_modules:
   - mounts
   - locale
   - set-passwords
-  - package-update-upgrade-install
   - ntp
   - timezone
   - resolv_conf
