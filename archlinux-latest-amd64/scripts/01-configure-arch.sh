@@ -26,6 +26,8 @@ DHCP=ipv4
 EOF
 
 echo "* Install GRUB"
+$CHROOT sed -i "s#(MODULES=\(.*)\)#\1 virtio virtio_blk virtio_pci virtio_net)#" /etc/mkinitcpio.conf
+$CHROOT mkinitcpio -p linux
 yes | $CHROOT pacman -S grub
 # sed -i 's#^\(GRUB_CMDLINE_LINUX_DEFAULT=".*\)"$#\1 net.ifnames=0 biosdevname=0"#' /mnt/etc/default/grub
 $CHROOT grub-install --target=i386-pc $DISK
