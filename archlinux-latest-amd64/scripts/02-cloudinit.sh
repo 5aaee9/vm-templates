@@ -41,7 +41,6 @@ datasource_list: [ NoCloud, ConfigDrive ]
 cloud_init_modules:
   - growpart
   - resizefs
-  - bootcmd
   - seed_random
   - set_hostname
   - update_hostname
@@ -71,7 +70,7 @@ growpart:
   devices: ['/dev/sda2']
   ignore_growroot_disabled: false
 
-bootcmd:
+runcmd:
   - [ cloud-init-per, once, grow_fs, resizefs, /dev/sda2 ]
 EOF
 
