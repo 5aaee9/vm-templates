@@ -40,19 +40,26 @@ datasource_list: [ NoCloud, ConfigDrive ]
 cloud_init_modules:
   - growpart
   - resizefs
+  - bootcmd
   - seed_random
   - set_hostname
   - update_hostname
+  - update_etc_hosts
   - ssh
   - ca-certs
 
 cloud_config_modules:
+  - runcmd
   - mounts
   - locale
   - set-passwords
   - ntp
   - timezone
   - resolv_conf
+
+cloud_final_modules:
+ - ssh-authkey-fingerprints
+ - keys-to-console
 
 system_info:
   distro: arch
@@ -61,8 +68,11 @@ system_info:
 
 growpart:
   mode: auto
-  devices: ['/']
+  devices: ['/dev/sda2']
   ignore_growroot_disabled: false
+
+bootcmd:
+  - [ cloud-init-per, once, grow_fs, resizefs, /dev/sda2 ]
 EOF
 
 $CHROOT systemctl enable cloud-init-local.service
