@@ -81,10 +81,10 @@ $CHROOT systemctl enable cloud-init.service
 $CHROOT systemctl enable cloud-config.service
 $CHROOT systemctl enable cloud-final.service
 
-cat > /usr/bin/hostname <<"EOF"
+cat > /mnt/usr/bin/hostname <<"EOF"
 #!/bin/sh
 set -e
 
 hostnamectl set-hostname $1
 EOF
-chmod +x /usr/bin/hostname
+chmod +x /mnt/usr/bin/hostname
