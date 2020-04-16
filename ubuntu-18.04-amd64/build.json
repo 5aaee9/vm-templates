@@ -3,7 +3,8 @@
         "disk_size": "8192M",
         "preseed": "preseed.cfg",
         "headless": "false",
-        "accelerator": "kvm"
+        "accelerator": "kvm",
+        "display": "gtk"
     },
     "provisioners": [{
         "type": "shell",
@@ -21,6 +22,7 @@
         "disk_compression": true,
         "memory": 2048,
         "headless": "{{ user `headless` }}",
+        "display": "{{ user `display` }}",
         "output_directory": "output",
 
         "iso_urls": [
@@ -29,7 +31,7 @@
         "iso_checksum": "{{ user `iso_checksum` }}",
         "iso_checksum_type": "sha256",
 
-        "ssh_username": "packer",
+        "ssh_username": "root",
         "ssh_password": "packer",
         "ssh_wait_timeout": "90m",
         "ssh_file_transfer_method": "scp",
