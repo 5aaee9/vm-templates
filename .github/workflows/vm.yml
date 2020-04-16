@@ -33,7 +33,7 @@ jobs:
         run: |
           curl -X POST \
             -F "filename=archlinux-latest-amd64.qcow2" \
-            -F "file=@archlinux-latest-amd64/output-archlinux-latest-amd64/packer-archlinux-latest-amd64" \
+            -F "file=@archlinux-latest-amd64/output/packer-archlinux-latest-amd64" \
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-api.indexyz.me/QEMU/Templates
 
@@ -62,7 +62,7 @@ jobs:
         run: |
           curl -X POST \
             -F "filename=centos-6-amd64.qcow2" \
-            -F "file=@centos-6-amd64/output-centos-6-amd64/packer-centos-6-amd64" \
+            -F "file=@centos-6-amd64/output/packer-centos-6-amd64" \
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-api.indexyz.me/QEMU/Templates
 
@@ -91,7 +91,7 @@ jobs:
         run: |
           curl -X POST \
             -F "filename=centos-7-amd64.qcow2" \
-            -F "file=@centos-7-amd64/output-centos-7-amd64/packer-centos-7-amd64" \
+            -F "file=@centos-7-amd64/output/packer-centos-7-amd64" \
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-api.indexyz.me/QEMU/Templates
 
@@ -122,6 +122,6 @@ jobs:
         run: |
           curl -X POST \
             -F "filename=centos-8-stream-amd64.qcow2" \
-            -F "file=@centos-8-stream-amd64/output-centos-8-stream-amd64/packer-centos-8-stream-amd64" \
+            -F "file=@centos-8-stream-amd64/output/packer-centos-8-stream-amd64" \
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-api.indexyz.me/QEMU/Templates

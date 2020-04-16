@@ -41,6 +41,7 @@
         "ssh_wait_timeout": "90m",
         "ssh_file_transfer_method": "scp",
         "http_directory": "http",
+        "output_directory": "output",
         "shutdown_command": "shutdown -P now",
 
         "boot_wait": "2s",
