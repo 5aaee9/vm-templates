@@ -1,0 +1,6 @@
+{
+    "iso_name": "ubuntu-18.04.4-server-amd64.iso",
+    "iso_url": "http://cdimage.ubuntu.com/ubuntu/releases/bionic/release/ubuntu-18.04.4-server-amd64.iso",
+
+    "iso_checksum": "E2ECDACE33C939527CBC9E8D23576381C493B071107207D2040AF72595F8990B"
+}
