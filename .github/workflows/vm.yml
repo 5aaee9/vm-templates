@@ -126,7 +126,7 @@ jobs:
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-api.indexyz.me/QEMU/Templates
 
-  ubuntu-18.04:
+  ubuntu-18-04:
     name: Ubuntu 18.04 Build
     runs-on: self-hosted
 
