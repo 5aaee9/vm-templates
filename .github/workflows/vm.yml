@@ -125,3 +125,33 @@ jobs:
             -F "file=@centos-8-stream-amd64/output/packer-centos-8-stream-amd64" \
             -F "token=$FILE_UPLOAD_TOKEN" \
             https://files-api.indexyz.me/QEMU/Templates
+
+  ubuntu-18.04:
+    name: Ubuntu 18.04 Build
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Download ISO
+        run:
+          bash scripts/download_iso.sh ./ubuntu-18.04-amd64
+
+      - name: Build ubuntu-18.04-amd64
+        run: |
+          export PACKER_LOG=1
+          cd ubuntu-18.04-amd64
+          packer build -var 'headless=true' \
+            -var-file image.json \
+            build.json
+
+      - name: Release files
+        env:
+          FILE_UPLOAD_TOKEN: ${{ secrets.FILE_UPLOAD_TOKEN }}
+        run: |
+          curl -X POST \
+            -F "filename=ubuntu-18.04-amd64.qcow2" \
+            -F "file=@ubuntu-18.04-amd64/output/packer-ubuntu-18.04-amd64" \
+            -F "token=$FILE_UPLOAD_TOKEN" \
+            https://files-api.indexyz.me/QEMU/Templates

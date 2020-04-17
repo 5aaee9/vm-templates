@@ -4,3 +4,4 @@ packer_cache
 output-*
 output
 isos
+packer-*
