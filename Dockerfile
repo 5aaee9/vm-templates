@@ -1,6 +1,6 @@
 FROM archlinux
 
-ENV RUNNER_VERSION="2.168.0"
+ENV RUNNER_VERSION="2.169.1"
 
 # Init build env
 RUN yes | pacman -Syu packer \
