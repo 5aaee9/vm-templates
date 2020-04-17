@@ -14,6 +14,7 @@ RUN yes | pacman -Syu packer \
         rclone \
         krb5 \
         wget \
+        iputils \
         jq && \
     mkdir /runner && \
     cd /runner && \
