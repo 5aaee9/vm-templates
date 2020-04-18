@@ -12,6 +12,7 @@ RUN yes | pacman -Syu packer \
         openssl \
         zlib \
         rclone \
+        unzip \
         krb5 \
         wget \
         iputils \
