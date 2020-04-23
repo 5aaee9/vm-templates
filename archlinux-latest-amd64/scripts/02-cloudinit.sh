@@ -4,7 +4,7 @@ set -ex
 CHROOT="arch-chroot /mnt"
 
 cd /mnt/
-wget https://space.indexyz.me/packages/growpart-0.31-1-any.pkg.tar.xz
+wget https://drive.indexyz.me/api/files/onedrive/Software/Linux/ArchLinux/growpart-0.31-1-any.pkg.tar.xz
 $CHROOT pacman -U /growpart-0.31-1-any.pkg.tar.xz --noconfirm
 rm -f growpart-0.31-1-any.pkg.tar.xz
 $CHROOT pacman -S cloud-init --noconfirm
