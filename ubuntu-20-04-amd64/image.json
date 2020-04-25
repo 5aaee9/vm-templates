@@ -1,0 +1,6 @@
+{
+    "iso_name": "ubuntu-20.04-netboot-server-amd64.iso",
+    "iso_url": "http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/mini.iso",
+
+    "iso_checksum": "0E79E00BF844929D40825B1F0E8634415CDA195BA23BAE0B041911FDE4DFE018"
+}

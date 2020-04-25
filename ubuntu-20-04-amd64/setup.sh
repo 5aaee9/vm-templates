@@ -7,6 +7,7 @@ apt-get install qemu-guest-agent -y
 systemctl enable qemu-guest-agent
 
 # cloud-init cloud-guest-utils
+
 # cleanup
 apt autoremove --purge -y
 apt-get clean -y
