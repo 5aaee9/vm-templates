@@ -7,6 +7,12 @@
         "display": "gtk"
     },
     "provisioners": [{
+        "type": "ansible",
+        "playbook_file": "../shared/playbook.yml",
+        "galaxy_file": "../shared/requirements.yml",
+        "sftp_command": "/usr/lib/openssh/sftp-server -e",
+        "galaxy_force_install": true
+    }, {
         "type": "shell",
         "scripts": [
             "setup.sh"
