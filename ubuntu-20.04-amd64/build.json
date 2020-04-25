@@ -50,6 +50,7 @@
             " debconf/frontend=noninteractive<wait>",
             " debian-installer=en_US<wait>",
             " fb=false<wait>",
+            " net.ifnames=0<wait>",
             " initrd=/initrd.gz<wait>",
             " kbd-chooser/method=us<wait>",
             " keyboard-configuration/layout=USA<wait>",
