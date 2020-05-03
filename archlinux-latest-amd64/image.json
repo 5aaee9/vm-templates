@@ -1,6 +1,6 @@
 {
-    "iso_name": "archlinux-2020.04.01-x86_64.iso",
-    "iso_url": "https://mirrors.xtom.com/archlinux/iso/2020.04.01/archlinux-2020.04.01-x86_64.iso",
+    "iso_name": "archlinux-2020.05.01-x86_64.iso",
+    "iso_url": "https://mirrors.xtom.com/archlinux/iso/2020.05.01/archlinux-2020.05.01-x86_64.iso",
 
-    "iso_checksum": "836FF1A2D4226452D0AB4610D947C0DB3E981ABD4EE831C4C785A830C8893005"
+    "iso_checksum": "0B71A04ECD9CEEFA72683948BB971DC8C77A92C0EDBEAC5647B98A6E47B5C203"
 }
