@@ -8,9 +8,19 @@ on:
     - scripts/entrypoint.sh
 
 jobs:
-  archlinux:
-    name: ArchLinux Build
-    runs-on: self-hosted
+  vm:
+    name: VM Build
+    runs-on: [self-hosted]
+
+    strategy:
+      matrix:
+        template: 
+          - 'centos-6-amd64'
+          - 'centos-7-amd64'
+          - 'centos-8-stream-amd64'
+          - 'archlinux-latest-amd64'
+          - 'ubuntu-18.04-amd64'
+          - 'ubuntu-20.04-amd64'
 
     steps:
       - name: Checkout Code
@@ -18,12 +28,12 @@ jobs:
 
       - name: Download ISO
         run:
-          bash scripts/download_iso.sh ./archlinux-latest-amd64
+          bash scripts/download_iso.sh ./${{ matrix.template }}
 
-      - name: Build archlinux-latest-amd64
+      - name: Build ${{ matrix.template }}
         run: |
           export PACKER_LOG=1
-          cd archlinux-latest-amd64
+          cd ${{ matrix.template }}
           packer build -var 'headless=true' \
             -var-file image.json \
             build.json
@@ -39,176 +49,5 @@ jobs:
 
       - name: Release files
         run: |
-          mv archlinux-latest-amd64/output/packer-archlinux-latest-amd64 archlinux-latest-amd64.qcow2
-          ./linux-x64/YukiDrive.CLI --upload onedrive archlinux-latest-amd64.qcow2 QEMU/Templates
-
-  centos-6:
-    name: CentOS 6 Build
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Download ISO
-        run:
-          bash scripts/download_iso.sh ./centos-6-amd64
-
-      - name: Build centos-6-amd64
-        run: |
-          export PACKER_LOG=1
-          cd centos-6-amd64
-          packer build -var 'headless=true' \
-            -var-file image.json \
-            build.json
-
-      - name: Setup YukiDrive Cli
-        run: |
-          export YUKI_VERSION=1.0.1
-          wget https://drive.yukino.co/api/files/onedrive/YukiDrive/CLI/$YUKI_VERSION/linux-x64.zip
-          unzip linux-x64.zip
-          rm -f linux-x64.zip
-          chmod +x ./linux-x64/YukiDrive.CLI
-          ./linux-x64/YukiDrive.CLI --init https://drive.indexyz.me ${{ secrets.FILE_UPLOAD_TOKEN }}
-
-      - name: Release files
-        run: |
-          mv centos-6-amd64/output/packer-centos-6-amd64 centos-6-amd64.qcow2
-          ./linux-x64/YukiDrive.CLI --upload onedrive centos-6-amd64.qcow2 QEMU/Templates
-
-  centos-7:
-    name: CentOS 7 Build
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Download ISO
-        run:
-          bash scripts/download_iso.sh ./centos-7-amd64
-
-      - name: Build centos-7-amd64
-        run: |
-          export PACKER_LOG=1
-          cd centos-7-amd64
-          packer build -var 'headless=true' \
-            -var-file image.json \
-            build.json
-
-      - name: Setup YukiDrive Cli
-        run: |
-          export YUKI_VERSION=1.0.1
-          wget https://drive.yukino.co/api/files/onedrive/YukiDrive/CLI/$YUKI_VERSION/linux-x64.zip
-          unzip linux-x64.zip
-          rm -f linux-x64.zip
-          chmod +x ./linux-x64/YukiDrive.CLI
-          ./linux-x64/YukiDrive.CLI --init https://drive.indexyz.me ${{ secrets.FILE_UPLOAD_TOKEN }}
-
-      - name: Release files
-        run: |
-          mv centos-7-amd64/output/packer-centos-7-amd64 centos-7-amd64.qcow2
-          ./linux-x64/YukiDrive.CLI --upload onedrive centos-7-amd64.qcow2 QEMU/Templates
-
-  centos-8-stream:
-    name: CentOS 8 Stream Build
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Download ISO
-        run:
-          bash scripts/download_iso.sh ./centos-8-stream-amd64
-
-      - name: Build centos-8-stream-amd64
-        run: |
-          export PACKER_LOG=1
-          cd centos-8-stream-amd64
-          cloud-localds cloud.img cloud.cfg
-          packer build -var 'headless=true' \
-            -var-file image.json \
-            build.json
-
-      - name: Setup YukiDrive Cli
-        run: |
-          export YUKI_VERSION=1.0.1
-          wget https://drive.yukino.co/api/files/onedrive/YukiDrive/CLI/$YUKI_VERSION/linux-x64.zip
-          unzip linux-x64.zip
-          rm -f linux-x64.zip
-          chmod +x ./linux-x64/YukiDrive.CLI
-          ./linux-x64/YukiDrive.CLI --init https://drive.indexyz.me ${{ secrets.FILE_UPLOAD_TOKEN }}
-
-      - name: Release files
-        run: |
-          mv centos-8-stream-amd64/output/packer-centos-8-stream-amd64 centos-8-stream-amd64.qcow2
-          ./linux-x64/YukiDrive.CLI --upload onedrive centos-8-stream-amd64.qcow2 QEMU/Templates
-
-  ubuntu-18-04:
-    name: Ubuntu 18.04 Build
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Download ISO
-        run:
-          bash scripts/download_iso.sh ./ubuntu-18.04-amd64
-
-      - name: Build ubuntu-18.04-amd64
-        run: |
-          export PACKER_LOG=1
-          cd ubuntu-18.04-amd64
-          packer build -var 'headless=true' \
-            -var-file image.json \
-            build.json
-
-      - name: Setup YukiDrive Cli
-        run: |
-          export YUKI_VERSION=1.0.1
-          wget https://drive.yukino.co/api/files/onedrive/YukiDrive/CLI/$YUKI_VERSION/linux-x64.zip
-          unzip linux-x64.zip
-          rm -f linux-x64.zip
-          chmod +x ./linux-x64/YukiDrive.CLI
-          ./linux-x64/YukiDrive.CLI --init https://drive.indexyz.me ${{ secrets.FILE_UPLOAD_TOKEN }}
-
-      - name: Release files
-        run: |
-          mv ubuntu-18.04-amd64/output/packer-ubuntu-18.04-amd64 ubuntu-18.04-amd64.qcow2
-          ./linux-x64/YukiDrive.CLI --upload onedrive ubuntu-18.04-amd64.qcow2 QEMU/Templates
-
-  ubuntu-20-04:
-    name: Ubuntu 20.04 Build
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Download ISO
-        run:
-          bash scripts/download_iso.sh ./ubuntu-20.04-amd64
-
-      - name: Build ubuntu-20.04-amd64
-        run: |
-          export PACKER_LOG=1
-          cd ubuntu-20.04-amd64
-          packer build -var 'headless=true' \
-            -var-file image.json \
-            build.json
-
-      - name: Setup YukiDrive Cli
-        run: |
-          export YUKI_VERSION=1.0.1
-          wget https://drive.yukino.co/api/files/onedrive/YukiDrive/CLI/$YUKI_VERSION/linux-x64.zip
-          unzip linux-x64.zip
-          rm -f linux-x64.zip
-          chmod +x ./linux-x64/YukiDrive.CLI
-          ./linux-x64/YukiDrive.CLI --init https://drive.indexyz.me ${{ secrets.FILE_UPLOAD_TOKEN }}
-
-      - name: Release files
-        run: |
-          mv ubuntu-20.04-amd64/output/packer-ubuntu-20.04-amd64 ubuntu-20.04-amd64.qcow2
-          ./linux-x64/YukiDrive.CLI --upload onedrive ubuntu-20.04-amd64.qcow2 QEMU/Templates
+          mv ${{ matrix.template }}/output/packer-${{ matrix.template }} ${{ matrix.template }}.qcow2
+          ./linux-x64/YukiDrive.CLI --upload onedrive ${{ matrix.template }}.qcow2 QEMU/Templates
